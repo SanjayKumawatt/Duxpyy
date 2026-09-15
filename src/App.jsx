@@ -3,22 +3,22 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AppLayout from './Layout/AppLayout'
 import ErrorPage from './Components/ErrorPage'
 import Home from './Pages/Home'
-import Agents from './Pages/Agents'
-import UseCases from './Pages/UseCases,'
-import Features from './Pages/Featurs'
-import Pricing from './Pages/Pricing'
+import About from './Pages/About'
+import IDPPage from './Pages/Idp'
+import FormsManagement from './Pages/formManagement'
+import XFAConversion from './Pages/XFS'
+import LoanApplication from './Pages/Loan'
+import AccountStatements from './Pages/Accountstatement'
+import FraudAlerts from './Pages/Fraud'
+import Flow from './Pages/Flow'
+import Agent from './Pages/Agents'
+import Inbound from './Pages/Inbound'
+import Outbound from './Pages/OutBound'
+import FormProduct from './Pages/Form'
+import BetaAccess from './Pages/Betaaccess'
 import Contact from './Pages/Contact'
-import Sales from './Pages/Sales'
-import Engineering from './Pages/Engineering'
-import Recruiting from './Pages/Recruting'
-import ProjectManagement from './Pages/ProjectManagement'
-import Finance from './Pages/Finance'
-import CustomerSupport from './Pages/CustomerSupport'
-import Blogs from './Pages/Blogs'
-import Auth from './Pages/Auth'
 import Privacy from './Pages/Privacy'
-import TermsOfService from './Pages/TermsOfServcies'
-
+import Terms from './Pages/Terms'
 const App = () => {
 
   const router=createBrowserRouter([
@@ -32,81 +32,74 @@ const App = () => {
           element:<Home/>
         },
         {
-          path:"/agents",
-          element:<Agents/>
+          path:"/about",
+          element:<About/>
         },
         {
-          path:"/use-cases",
-          element:<UseCases/>
+          path:"/solutions/idp",
+          element:<IDPPage/>
         },
         {
-          path:"/features",
-          element:<Features/>
+          path:"/solutions/forms-management",
+          element:<FormsManagement/>
         },
         {
-          path:"/pricing",
-          element:<Pricing/>
+          path:"/solutions/xfa-conversion",
+          element:<XFAConversion/>
+        },
+        {
+          path:"/use-case/loan-application",
+          element:<LoanApplication/>
+        },
+        {
+          path:"/use-case/account-statements",
+          element:<AccountStatements/>
+        },
+        {
+          path:"/use-case/fraud-alerts",
+          element:<FraudAlerts/>
+        },
+        {
+          path:"/products/flow",
+          element:<Flow/>
+        },
+        {
+          path:"/products/agent",
+          element:<Agent/>
+        },
+        {
+          path:"/products/inbound",
+          element:<Inbound/>
+        },
+        {
+          path:"/products/outbound",
+          element:<Outbound/>
+        },
+        {
+          path:"/products/form",
+          element:<FormProduct/>
+        },
+        {
+          path:"/beta-access",
+          element:<BetaAccess/>
+        },
+        {
+          path:"/early-access",
+          element:<BetaAccess/>
         },
         {
           path:"/contact",
           element:<Contact/>
         },
         {
-          path:"/solutions/sales",
-          element:<Sales/>
-        },
-        {
-          path:"/solutions/engineering",
-          element:<Engineering/>
-        },
-        {
-          path:"/solutions/recruiting",
-          element:<Recruiting/>
-        },
-        {
-          path:"/solutions/project-management",
-          element:<ProjectManagement/>
-        },
-        {
-          path:"/solutions/finance",
-          element:<Finance/>
-        },
-        {
-          path:"/solutions/customer-support",
-          element:<CustomerSupport/>
-        },
-        {
-          path:"/blogs",
-          element:<Blogs/>
-        },
-        {
-          path:"/login",
-          element:<Auth/>
-        },
-        {
-          path:"/privacy-policy",
+          path:"/privacy",
           element:<Privacy/>
         },
         {
-          path:"/terms-of-service",
-          element:<TermsOfService/>
+          path:"/terms",
+          element:<Terms/>
         },
-        {
-          path:"/request-demo",
-          element:<Contact/>
-        },
-        {
-          path:"/checkout/pro",
-          element:<Contact/>
-        },
-        {
-          path:"/signup",
-          element:<Auth/>
-        },
-        {
-          path:"/book-demo",
-          element:<Contact/>
-        },
+        
       ]
     }
   ])

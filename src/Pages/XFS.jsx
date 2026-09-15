@@ -1,43 +1,36 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  ChevronDown, 
-  ChevronUp, 
-  Bot, 
-  Globe, 
-  Mic 
-} from 'lucide-react';
+import { ChevronDown, ChevronUp, FileCode2, Split, FileCheck } from 'lucide-react';
 import img from "../assets/illus.jpg";
 
 const BlinkingCursor = () => (
   <span className="animate-pulse border-r-2 border-blue-600 ml-1"></span>
 );
 
-const Agent = () => {
-  const [openAccordion, setOpenAccordion] = useState(0); // First one open by default
+const XFAConversion = () => {
+  const [openAccordion, setOpenAccordion] = useState(0);
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', accepted: false });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Accordion Data based on the screenshot provided
   const accordionData = [
     {
       id: 0,
-      title: "Goal Oriented Digital Worker",
-      icon: Bot,
-      content: "Effortlessly define goals in conversational language, enabling seamless communication between users and the AI worker."
+      title: "User friendly HTML Forms in Seconds",
+      icon: FileCode2,
+      content: "Automatically convert legacy XFA forms to clean HTML forms. Adapt and change forms and sections with our intuitive WYSIWYG editor designed for early-stage and agile operations."
     },
     {
       id: 1,
-      title: "100+ Languages out of box",
-      icon: Globe,
-      content: "Our developing NLP models are built to understand and process multiple regional and global languages, helping your early-stage team scale operations without language barriers."
+      title: "Automated Split into Sections",
+      icon: Split,
+      content: "Break down long and cumbersome XML/XFA forms into logical, multi-step web sections to deliver an intuitive user experience without manual code rewrites."
     },
     {
       id: 2,
-      title: "Text & Voice enabled",
-      icon: Mic,
-      content: "Interact with our digital agents through simple text chat or voice inputs. We are building flexible, multimodal interfaces to suit your growing business requirements seamlessly."
+      title: "Retrieve Filled PDFs for existing Processes",
+      icon: FileCheck,
+      content: "Keep your current downstream workflows uninterrupted. Even after data is submitted via web forms, automatically generate and store the corresponding filled PDF for compliance and archival."
     }
   ];
 
@@ -60,11 +53,12 @@ const Agent = () => {
       {/* --- HERO SECTION --- */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-8">
-          Agent - Goal Oriented AI <br className="hidden sm:block" />
-          Worker <BlinkingCursor />
+          Convert XFA Forms to <br className="hidden sm:block" />
+          Web Based Forms <BlinkingCursor />
         </h1>
-        <p className="text-lg text-gray-500 leading-relaxed max-w-3xl mx-auto mb-10">
-          Introducing our groundbreaking Agent Module. Whether you’re new to AI integration or a seasoned user, our platform ensures that everyone can achieve their goals effortlessly, unleashing productivity without boundaries. Prepare to witness the pinnacle of AI-driven task completion – this marks a new era in streamlined and effective agent performance.
+        <p className="text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto mb-10">
+          XFA (XML based) forms are fillable forms that power many organisations. 
+          DUXPY Tech helps convert those into modern, web-based HTML forms to keep systems lightweight and future-ready.
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -80,7 +74,7 @@ const Agent = () => {
 
       {/* --- FEATURES / ACCORDION SECTION --- */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 border-t border-gray-100">
-        <div className="flex flex-col-reverse lg:flex-row gap-16 items-start">
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
           
           {/* Left Side: Accordion */}
           <div className="w-full lg:w-3/5">
@@ -113,7 +107,7 @@ const Agent = () => {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.25, ease: "easeInOut" }}
                       >
-                        <div className="px-6 pb-6 pt-2 border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
+                        <div className="px-6 pb-5 pt-2 border-t border-gray-100 text-gray-600 text-sm leading-relaxed">
                           {item.content}
                         </div>
                       </motion.div>
@@ -124,13 +118,13 @@ const Agent = () => {
             </div>
           </div>
 
-          {/* Right Side: Sticky Heading */}
+          {/* Right Side: Features Title */}
           <div className="w-full lg:w-2/5 lg:sticky lg:top-32">
-            <span className="text-blue-600 font-semibold tracking-wider text-xs uppercase mb-4 block">
+            <span className="text-blue-600 font-semibold tracking-wider text-sm uppercase mb-4 block">
               Features
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight">
-              Our <br/> Advantages
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              Why choose Forms by DUXPY Tech?
             </h2>
           </div>
 
@@ -144,7 +138,7 @@ const Agent = () => {
             
             {/* Left Side: Imported Illustration */}
             <div className="w-full md:w-1/2 flex justify-center">
-              <div className="w-full max-w-md aspect-video rounded-2xl flex items-center justify-center overflow-hidden mix-blend-multiply">
+              <div className="w-full max-w-md aspect-video rounded-2xl flex items-center justify-center overflow-hidden">
                 <img 
                   src={img} 
                   alt="AI Trends and Insights Illustration" 
@@ -197,14 +191,14 @@ const Agent = () => {
                 <div className="flex items-start gap-2 pt-2 pb-4">
                   <input 
                     type="checkbox" 
-                    id="agentPrivacy" 
+                    id="xfaPrivacy" 
                     name="accepted"
                     checked={formData.accepted}
                     onChange={handleInputChange}
                     required
                     className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
-                  <label htmlFor="agentPrivacy" className="text-sm text-gray-500 cursor-pointer">
+                  <label htmlFor="xfaPrivacy" className="text-sm text-gray-500 cursor-pointer">
                     I accept the privacy policy
                   </label>
                 </div>
@@ -238,4 +232,4 @@ const Agent = () => {
   );
 };
 
-export default Agent;
+export default XFAConversion;

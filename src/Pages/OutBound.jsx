@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronDown, 
   ChevronUp, 
-  Bot, 
-  Globe, 
-  Mic 
+  FileSignature, 
+  LayoutTemplate, 
+  Send 
 } from 'lucide-react';
 import img from "../assets/illus.jpg";
 
@@ -14,30 +14,30 @@ const BlinkingCursor = () => (
   <span className="animate-pulse border-r-2 border-blue-600 ml-1"></span>
 );
 
-const Agent = () => {
+const Outbound = () => {
   const [openAccordion, setOpenAccordion] = useState(0); // First one open by default
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', accepted: false });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Accordion Data based on the screenshot provided
+  // Accordion Data - Added relevant dummy features to match the Outbound module context
   const accordionData = [
     {
       id: 0,
-      title: "Goal Oriented Digital Worker",
-      icon: Bot,
-      content: "Effortlessly define goals in conversational language, enabling seamless communication between users and the AI worker."
+      title: "Effortless Document Creation",
+      icon: FileSignature,
+      content: "Empowering users to effortlessly create professional-grade documents with unparalleled ease and efficiency, fostering creativity without constraints."
     },
     {
       id: 1,
-      title: "100+ Languages out of box",
-      icon: Globe,
-      content: "Our developing NLP models are built to understand and process multiple regional and global languages, helping your early-stage team scale operations without language barriers."
+      title: "Dynamic Template Engine",
+      icon: LayoutTemplate,
+      content: "Build and store reusable templates for invoices, contracts, and reports. Our developing systems allow your team to map dynamic data directly into these templates without writing code."
     },
     {
       id: 2,
-      title: "Text & Voice enabled",
-      icon: Mic,
-      content: "Interact with our digital agents through simple text chat or voice inputs. We are building flexible, multimodal interfaces to suit your growing business requirements seamlessly."
+      title: "Seamless Distribution",
+      icon: Send,
+      content: "Once generated, easily configure routing to send your documents via email, secure links, or push them directly to your existing Indian compliance and cloud storage platforms."
     }
   ];
 
@@ -60,11 +60,11 @@ const Agent = () => {
       {/* --- HERO SECTION --- */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-8">
-          Agent - Goal Oriented AI <br className="hidden sm:block" />
-          Worker <BlinkingCursor />
+          Outbound - Document Design <br className="hidden sm:block" />
+          & Generation <BlinkingCursor />
         </h1>
         <p className="text-lg text-gray-500 leading-relaxed max-w-3xl mx-auto mb-10">
-          Introducing our groundbreaking Agent Module. Whether you’re new to AI integration or a seasoned user, our platform ensures that everyone can achieve their goals effortlessly, unleashing productivity without boundaries. Prepare to witness the pinnacle of AI-driven task completion – this marks a new era in streamlined and effective agent performance.
+          Introducing our revolutionary Outbound Module, where innovation meets document design excellence. Whether you’re a design novice or a seasoned pro, our editor ensures that everyone can create polished documents effortlessly, fostering creativity without constraints. Get ready to experience the epitome of Intelligent Document Design – this is the future of outbound communication.
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -197,14 +197,14 @@ const Agent = () => {
                 <div className="flex items-start gap-2 pt-2 pb-4">
                   <input 
                     type="checkbox" 
-                    id="agentPrivacy" 
+                    id="outboundPrivacy" 
                     name="accepted"
                     checked={formData.accepted}
                     onChange={handleInputChange}
                     required
                     className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
-                  <label htmlFor="agentPrivacy" className="text-sm text-gray-500 cursor-pointer">
+                  <label htmlFor="outboundPrivacy" className="text-sm text-gray-500 cursor-pointer">
                     I accept the privacy policy
                   </label>
                 </div>
@@ -238,4 +238,4 @@ const Agent = () => {
   );
 };
 
-export default Agent;
+export default Outbound;

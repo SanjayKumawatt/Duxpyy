@@ -1,192 +1,160 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, Mail, Phone, CheckCircle2, Loader2, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  Mail, 
+  MapPin, 
+  TrendingUp,
+  Minus
+} from 'lucide-react';
+
+const BlinkingCursor = () => (
+  <span className="animate-pulse border-r-2 border-blue-600 ml-1"></span>
+);
 
 const Contact = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showToast, setShowToast] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitted(true);
+    setFormData({ name: '', email: '', message: '' });
     
-    // Start Loading State
-    setIsSubmitting(true);
-    
-    // Simulate network request (2.5 seconds)
+    // Hide success message after 4 seconds
     setTimeout(() => {
-      setIsSubmitting(false);
-      setShowToast(true);
-      e.target.reset(); // Clear the form
-      
-      // Auto-hide the toast after 4 seconds
-      setTimeout(() => {
-        setShowToast(false);
-      }, 4000);
-    }, 2500);
+      setIsSubmitted(false);
+    }, 4000);
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#0a0514] font-sans text-white pt-24 pb-20 relative overflow-hidden flex items-center justify-center">
+    <div className="pt-20 font-sans text-gray-900 bg-white min-h-screen">
       
-      {/* Background ambient light */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-900/10 blur-[120px] rounded-full pointer-events-none"></div>
+      {/* --- HERO HEADING --- */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-12 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">
+          Contact us <BlinkingCursor />
+        </h1>
+      </section>
 
-      <div className="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+      {/* --- MAIN CONTENT (FORM & CONTACT INFO) --- */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
           
-          {/* Left Column - Contact Info */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col justify-center space-y-10"
-          >
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
-                Contact Your AI-Meeting Assistant
-              </h1>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-md">
-                We'd love to hear from you! Whether you have a question about features, pricing, or anything else, our team is ready to answer all your questions.
-              </p>
-            </div>
+          {/* Left Side: Contact Form Area */}
+          <div className="w-full lg:w-1/2">
+            <span className="text-blue-600 font-semibold tracking-wider text-xs uppercase mb-4 block">
+              CONTACT US
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
+              Get in Touch with Our AI Specialists
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed mb-10">
+              Whether you have a question, need support, or just want to say hello, we’re here for you. Reach out to us using the contact form or through details provided for our location. We look forward to hearing from you!
+            </p>
 
-            <div className="space-y-6 pt-4">
-              {/* Address */}
-              <div className="flex items-start gap-4">
-                <MapPin className="w-6 h-6 text-gray-500 mt-1 flex-shrink-0" />
-                <div>
-                  <p className="text-white font-semibold text-base mb-1">DUXPY TECHNOLOGIES PRIVATE LIMITED</p>
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    House No. Sf1/448, Safipur 1, Harjinder Nagar,<br />
-                    Kanpur Nagar, Harjinder Nagar,<br />
-                    Uttar Pradesh, India, 208007.
-                  </p>
-                </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Your Name</label>
+                <input 
+                  type="text" 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full bg-white border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                />
               </div>
-
-             
-
-              {/* Email */}
-              <div className="flex items-center gap-4">
-                <Mail className="w-6 h-6 text-gray-500 flex-shrink-0" />
-                <a href="mailto:contact@duxpysystemhub.in" className="text-gray-400 text-sm hover:text-white transition-colors">
-                  contact@duxpysystemhub.in
-                </a>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column - Contact Form */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <form onSubmit={handleSubmit} className="flex flex-col space-y-6">
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="firstName" className="text-xs font-semibold text-gray-300 ml-1">First name</label>
-                  <input 
-                    type="text" 
-                    id="firstName"
-                    required
-                    className="w-full bg-[#13141f] border border-gray-800 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="lastName" className="text-xs font-semibold text-gray-300 ml-1">Last name</label>
-                  <input 
-                    type="text" 
-                    id="lastName"
-                    required
-                    className="w-full bg-[#13141f] border border-gray-800 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="email" className="text-xs font-semibold text-gray-300 ml-1">Email</label>
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Your Email</label>
                 <input 
                   type="email" 
-                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
-                  className="w-full bg-[#13141f] border border-gray-800 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
+                  className="w-full bg-white border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
                 />
               </div>
-
-              <div className="space-y-2">
-                <label htmlFor="phone" className="text-xs font-semibold text-gray-300 ml-1">Phone number</label>
-                <input 
-                  type="tel" 
-                  id="phone"
-                  className="w-full bg-[#13141f] border border-gray-800 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-xs font-semibold text-gray-300 ml-1">Message</label>
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Your Message (optional)</label>
                 <textarea 
-                  id="message"
-                  required
-                  rows="4"
-                  className="w-full bg-[#13141f] border border-gray-800 rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all resize-none"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  rows={5}
+                  className="w-full bg-white border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 resize-none"
                 ></textarea>
               </div>
 
-              <div className="flex justify-end pt-2">
+              <div className="pt-2">
                 <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="px-8 py-3.5 bg-white text-black font-semibold text-sm rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-center min-w-[150px] disabled:opacity-70 disabled:cursor-not-allowed"
+                  type="submit"
+                  className="w-full bg-blue-600 text-white px-8 py-3.5 rounded text-sm font-semibold hover:bg-blue-700 transition-colors"
                 >
-                  {isSubmitting ? (
-                    <Loader2 className="w-5 h-5 animate-spin text-black" />
-                  ) : (
-                    "Send message"
-                  )}
+                  Submit
                 </button>
               </div>
-
+              
+              {/* Inline Success Message */}
+              {isSubmitted && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-sm text-green-600 font-medium flex items-center justify-center gap-2 mt-4 p-3 bg-green-50 rounded-md border border-green-100"
+                >
+                  ✓ Your message has been sent. We'll get back to you shortly!
+                </motion.div>
+              )}
             </form>
-          </motion.div>
-        </div>
-      </div>
+          </div>
 
-      {/* Side Pop-up Toast Notification (No Browser Alerts) */}
-      <AnimatePresence>
-        {showToast && (
-          <motion.div 
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 100 }}
-            transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            className="fixed bottom-10 right-4 sm:right-10 bg-[#161722] border border-gray-700 shadow-[0_10px_40px_rgba(0,0,0,0.5)] rounded-xl p-4 flex items-start gap-4 z-50 max-w-sm w-full"
-          >
-            <div className="mt-0.5">
-              <CheckCircle2 className="w-5 h-5 text-green-400" />
+          {/* Right Side: Contact Information Card (No Map) */}
+          <div className="w-full lg:w-1/2 pt-2 lg:pt-0">
+            <div className="border border-gray-200 rounded-lg shadow-sm bg-white overflow-hidden">
+              
+              {/* Card Header */}
+              <div className="bg-gray-50 border-b border-gray-200 px-6 py-4 flex items-center gap-3">
+                <Minus className="w-5 h-5 text-gray-500" />
+                <span className="font-semibold text-gray-700">India Headquarters</span>
+              </div>
+              
+              {/* Card Body */}
+              <div className="p-6 md:p-8 space-y-6">
+                
+                {/* Email Info */}
+                <div className="flex items-start gap-4">
+                  <Mail className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <div>
+                    <a href="mailto:contact@duxpysystemhub.in" className="text-gray-600 hover:text-blue-600 transition-colors text-sm font-medium">
+                      contact@duxpysystemhub.in
+                    </a>
+                  </div>
+                </div>
+
+                {/* Address Info */}
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <div className="text-gray-600 text-sm leading-relaxed">
+                    <p className="font-medium text-gray-800 mb-1">DUXPY TECHNOLOGIES PRIVATE LIMITED</p>
+                    <p>House No. Sf1/448, Safipur 1,</p>
+                    <p>Harjinder Nagar, Kanpur Nagar,</p>
+                    <p>Uttar Pradesh, India, 208007</p>
+                  </div>
+                </div>
+
+              </div>
             </div>
-            <div className="flex-1">
-              <h4 className="text-sm font-semibold text-white mb-1">Message Sent!</h4>
-              <p className="text-xs text-gray-400">Your message has been successfully delivered to our team. We will get back to you shortly.</p>
-            </div>
-            <button 
-              onClick={() => setShowToast(false)}
-              className="text-gray-500 hover:text-white transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            
-            {/* Loading bar for auto-hide */}
-            <motion.div 
-              initial={{ width: "100%" }}
-              animate={{ width: "0%" }}
-              transition={{ duration: 4, ease: "linear" }}
-              className="absolute bottom-0 left-0 h-1 bg-green-500/50 rounded-b-xl"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+
+        </div>
+      </section>
+
+      
 
     </div>
   );

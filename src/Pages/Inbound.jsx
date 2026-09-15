@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronDown, 
   ChevronUp, 
-  Bot, 
-  Globe, 
-  Mic 
+  FileSearch, 
+  ScanText, 
+  Layers 
 } from 'lucide-react';
 import img from "../assets/illus.jpg";
 
@@ -14,30 +14,30 @@ const BlinkingCursor = () => (
   <span className="animate-pulse border-r-2 border-blue-600 ml-1"></span>
 );
 
-const Agent = () => {
+const Inbound = () => {
   const [openAccordion, setOpenAccordion] = useState(0); // First one open by default
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', accepted: false });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Accordion Data based on the screenshot provided
+  // Accordion Data - Added relevant dummy features to match the Inbound module context
   const accordionData = [
     {
       id: 0,
-      title: "Goal Oriented Digital Worker",
-      icon: Bot,
-      content: "Effortlessly define goals in conversational language, enabling seamless communication between users and the AI worker."
+      title: "Human Readable Definitions",
+      icon: FileSearch,
+      content: "Revolutionizing data management with Classification & Extraction guided by Human Readable Definitions, ensuring accuracy and efficiency in data processing. Gone are the days of rigid regions and outdated patterns."
     },
     {
       id: 1,
-      title: "100+ Languages out of box",
-      icon: Globe,
-      content: "Our developing NLP models are built to understand and process multiple regional and global languages, helping your early-stage team scale operations without language barriers."
+      title: "Versatile Document Handling",
+      icon: ScanText,
+      content: "Our developing inbound engines effortlessly process unstructured formats like scanned PDFs, invoices, and emails, helping your operations team extract valuable insights without manual data entry."
     },
     {
       id: 2,
-      title: "Text & Voice enabled",
-      icon: Mic,
-      content: "Interact with our digital agents through simple text chat or voice inputs. We are building flexible, multimodal interfaces to suit your growing business requirements seamlessly."
+      title: "Effortless Integration",
+      icon: Layers,
+      content: "Designed specifically for growing Indian businesses, DUXPY Tech's module integrates smoothly into your existing workflows, avoiding the need for complex IT overhauls or expensive setup costs."
     }
   ];
 
@@ -60,11 +60,11 @@ const Agent = () => {
       {/* --- HERO SECTION --- */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-8">
-          Agent - Goal Oriented AI <br className="hidden sm:block" />
-          Worker <BlinkingCursor />
+          Inbound - Document Classification <br className="hidden sm:block" />
+          & Extraction <BlinkingCursor />
         </h1>
         <p className="text-lg text-gray-500 leading-relaxed max-w-3xl mx-auto mb-10">
-          Introducing our groundbreaking Agent Module. Whether you’re new to AI integration or a seasoned user, our platform ensures that everyone can achieve their goals effortlessly, unleashing productivity without boundaries. Prepare to witness the pinnacle of AI-driven task completion – this marks a new era in streamlined and effective agent performance.
+          We’re thrilled to introduce you to our cutting-edge Inbound Module, where seamless document processing meets intelligence. This module has been meticulously designed to elevate your workflow, bringing efficiency and precision to every document handling task.
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -197,14 +197,14 @@ const Agent = () => {
                 <div className="flex items-start gap-2 pt-2 pb-4">
                   <input 
                     type="checkbox" 
-                    id="agentPrivacy" 
+                    id="inboundPrivacy" 
                     name="accepted"
                     checked={formData.accepted}
                     onChange={handleInputChange}
                     required
                     className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
-                  <label htmlFor="agentPrivacy" className="text-sm text-gray-500 cursor-pointer">
+                  <label htmlFor="inboundPrivacy" className="text-sm text-gray-500 cursor-pointer">
                     I accept the privacy policy
                   </label>
                 </div>
@@ -238,4 +238,4 @@ const Agent = () => {
   );
 };
 
-export default Agent;
+export default Inbound;

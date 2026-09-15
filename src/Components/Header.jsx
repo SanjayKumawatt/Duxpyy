@@ -3,174 +3,209 @@ import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronDown, 
-  Menu, 
-  X, 
-  Rocket, 
-  Settings, 
-  Users, 
-  KanbanSquare, 
-  TrendingUp, 
-  Headphones, 
-  MessageSquare,
-  BookOpen
+  Mail, 
+  Building2, 
+  ArrowRight, 
+  Workflow, 
+  Bot, 
+  ArrowDownToLine, 
+  ArrowUpFromLine, 
+  FormInput,
+  Menu,
+  X
 } from 'lucide-react';
+
 import logo from "../assets/logo.png"
 
 const Header = () => {
+  const [activeMenu, setActiveMenu] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
 
-  const solutions = [
-    {
-      name: 'Sales',
-      description: 'AI-powered sales call automation and insights.',
-      icon: <Rocket className="w-5 h-5 text-blue-400" />,
-      bgColor: 'bg-blue-400/10'
-    },
-    {
-      name: 'Engineering',
-      description: 'AI-powered CTO assistant and technical insights.',
-      icon: <Settings className="w-5 h-5 text-pink-400" />,
-      bgColor: 'bg-pink-400/10'
-    },
-    {
-      name: 'Recruiting',
-      description: 'AI-powered interview insights and hiring automation.',
-      icon: <Users className="w-5 h-5 text-green-400" />,
-      bgColor: 'bg-green-400/10'
-    },
-    {
-      name: 'Project Management',
-      description: 'AI-powered project management and product development tools.',
-      icon: <KanbanSquare className="w-5 h-5 text-orange-400" />,
-      bgColor: 'bg-orange-400/10'
-    },
-    {
-      name: 'Finance',
-      description: 'AI-powered VC/Dealflow agent Finance and automation.',
-      icon: <TrendingUp className="w-5 h-5 text-emerald-400" />,
-      bgColor: 'bg-emerald-400/10'
-    },
-    {
-      name: 'Customer Support',
-      description: 'AI-powered customer support and automation.',
-      icon: <Headphones className="w-5 h-5 text-purple-400" />,
-      bgColor: 'bg-purple-400/10'
-    }
-  ];
+  let timeoutId;
+
+  const handleMouseEnter = (menu) => {
+    clearTimeout(timeoutId);
+    setActiveMenu(menu);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutId = setTimeout(() => {
+      setActiveMenu(null);
+    }, 150);
+  };
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-[#0a0514]/80 backdrop-blur-md border-b border-white/10 text-white font-sans">
+    <header className="fixed top-0 w-full bg-white z-50 border-b border-gray-100 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex justify-between items-center h-20">
           
-          {/* Logo Section */}
+          {/* Logo Area */}
           <div className="flex-shrink-0 flex items-center gap-2">
-            <Link to="/" className="flex items-center gap-1">
-              <img src={logo} className='h-8 mb-1' alt="" />
-              <span className="text-2xl font-bold tracking-tight text-purple-400">
-                Duxpy
+            <Link to="/" className="flex items-center gap-2">
+              <img src={logo} className='h-9 mb-2' alt="" />
+              <span className="text-xl font-medium text-gray-800 tracking-tight">
+                Duxpy Tech
               </span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            <Link to="/agents" className="text-gray-300 hover:text-white font-medium text-sm transition-colors">Agents</Link>
-            <Link to="/use-cases" className="text-gray-300 hover:text-white font-medium text-sm transition-colors">Use cases</Link>
-            <Link to="/features" className="text-gray-300 hover:text-white font-medium text-sm transition-colors">Features</Link>
-            <Link to="/pricing" className="text-gray-300 hover:text-white font-medium text-sm transition-colors">Pricing</Link>
-            <Link to="/contact" className="text-gray-300 hover:text-white font-medium text-sm transition-colors">Contact</Link>
+            {/* About Dropdown */}
+            <div 
+              className="relative py-8"
+              onMouseEnter={() => handleMouseEnter('about')}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button className="flex items-center gap-1 text-gray-600 hover:text-blue-600 font-medium transition-colors">
+                About <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeMenu === 'about' ? 'rotate-180 text-blue-600' : ''}`} />
+              </button>
+              
+              <AnimatePresence>
+                {activeMenu === 'about' && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] bg-white border border-gray-100 shadow-xl rounded-2xl p-8 "
+                  >
+                    <div>
+                      {/* Clickable About Link */}
+                      <Link to="/about" className="flex items-start gap-4 group p-2 -m-2 rounded-xl hover:bg-gray-50 transition-colors">
+                        <Building2 className="w-6 h-6 text-gray-700 mt-1 group-hover:text-blue-600 transition-colors" />
+                        <div>
+                          <h3 className="text-lg font-medium text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">About our Company</h3>
+                          <p className="text-sm text-gray-500 leading-relaxed">
+                            At DUXPY TECHNOLOGIES, our team is committed to rethinking conventional methodologies to build scalable systems for India and beyond.
+                          </p>
+                        </div>
+                      </Link>
+                    </div>
+                   
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
 
             {/* Solutions Dropdown */}
             <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown('solutions')}
-              onMouseLeave={() => setActiveDropdown(null)}
+              className="relative py-8"
+              onMouseEnter={() => handleMouseEnter('solutions')}
+              onMouseLeave={handleMouseLeave}
             >
-              <button className="flex items-center gap-1 text-gray-300 hover:text-white font-medium text-sm transition-colors py-2">
-                Solutions <ChevronDown className="w-4 h-4" />
+              <button className="flex items-center gap-1 text-gray-600 hover:text-blue-600 font-medium transition-colors">
+                Solutions <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeMenu === 'solutions' ? 'rotate-180 text-blue-600' : ''}`} />
               </button>
-              
+
               <AnimatePresence>
-                {activeDropdown === 'solutions' && (
+                {activeMenu === 'solutions' && (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[800px] bg-[#13141f] rounded-2xl shadow-2xl border border-white/5 flex overflow-hidden"
+                    className="absolute top-20 -left-[400px] w-[1000px] bg-white border border-gray-100 shadow-xl rounded-2xl p-8 flex gap-8"
                   >
-                    <div className="w-2/3 p-6 grid grid-cols-2 gap-6">
-                      {solutions.map((item, idx) => (
-                        <Link to={`/solutions/${item.name.toLowerCase().replace(' ', '-')}`} key={idx} className="flex gap-4 p-2 rounded-lg hover:bg-white/5 transition-colors group">
-                          <div className={`mt-1 flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center ${item.bgColor}`}>
-                            {item.icon}
+                    <div className="w-1/4 border-r border-gray-100 pr-6">
+                      <h3 className="text-lg font-semibold text-gray-900 mb-6">Interested in our Industry Use Cases?</h3>
+                      <div className="space-y-4 text-sm font-medium">
+                        <div className="text-blue-600">Banking</div>
+                        <Link to="/use-case/loan-application" className="block text-gray-600 hover:text-blue-600 transition-colors">Loan Application Agent</Link>
+                        <Link to="/use-case/account-statements" className="block text-gray-600 hover:text-blue-600 transition-colors">Online Account Statements</Link>
+                        <Link to="/use-case/fraud-alerts" className="block text-gray-600 hover:text-blue-600 transition-colors">Automated Fraud Alerts</Link>
+                      </div>
+                    </div>
+                    
+                    <div className="w-3/4 grid grid-cols-3 gap-6">
+                      {/* Made Cards Clickable Links */}
+                      <Link to="/solutions/idp" className="block bg-gray-50 border border-gray-100 rounded-xl p-6 hover:shadow-md hover:border-blue-200 transition-all group">
+                        <h4 className="font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">Intelligent Document Processing (IDP)</h4>
+                        <p className="text-sm text-gray-500 leading-relaxed">
+                          Empower your Indian business users to automate incoming documents, forms or emails seamlessly. Exploring code-free approaches for early adopters.
+                        </p>
+                      </Link>
+                      <Link to="/solutions/forms-management" className="block bg-gray-50 border border-gray-100 rounded-xl p-6 hover:shadow-md hover:border-blue-200 transition-all group">
+                        <h4 className="font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">Forms Management</h4>
+                        <p className="text-sm text-gray-500 leading-relaxed">
+                          Forms digitalization best deployed following a logical process. Focused on sustainable ROI by enhancing current processes, tailored for the Indian market.
+                        </p>
+                      </Link>
+                      <Link to="/solutions/xfa-conversion" className="block bg-gray-50 border border-gray-100 rounded-xl p-6 hover:shadow-md hover:border-blue-200 transition-all group">
+                        <h4 className="font-semibold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">XFA Form Conversion</h4>
+                        <p className="text-sm text-gray-500 leading-relaxed">
+                          Automatically convert XFA (XML Forms Architecture) forms to modern web forms. Simplifying tech transitions with minimal coding.
+                        </p>
+                      </Link>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Products Dropdown */}
+            <div 
+              className="relative py-8"
+              onMouseEnter={() => handleMouseEnter('products')}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button className="flex items-center gap-1 text-gray-600 hover:text-blue-600 font-medium transition-colors">
+                Products <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeMenu === 'products' ? 'rotate-180 text-blue-600' : ''}`} />
+              </button>
+
+              <AnimatePresence>
+                {activeMenu === 'products' && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-20 -left-[500px] w-[1100px] bg-white border border-gray-100 shadow-xl rounded-2xl p-8 flex gap-8"
+                  >
+                    <div className="w-1/4 border-r border-gray-100 pr-6">
+                      <h3 className="text-blue-600 font-medium text-xl mb-4">Cloud or On-Premise</h3>
+                      <p className="text-sm text-gray-500 mb-6">
+                        Whether you prefer cloud hosting or on-premises installation for your early infrastructure, we got you covered across our Indian servers.
+                      </p>
+                     
+                    </div>
+
+                    <div className="w-3/4 grid grid-cols-5 gap-4">
+                      {/* Made Product Cards Clickable Links */}
+                      {[
+                        { icon: Workflow, name: 'Flow', desc: 'Workflow Design, Simulation & Monitoring', path: '/products/flow' },
+                        { icon: Bot, name: 'Agent', desc: 'Conversational and Goal-oriented AI Worker', path: '/products/agent' },
+                        { icon: ArrowDownToLine, name: 'Inbound', desc: 'Document/Data Classification and Extraction', path: '/products/inbound' },
+                        { icon: ArrowUpFromLine, name: 'Outbound', desc: 'Document Design, Generation and Distribution', path: '/products/outbound' },
+                        { icon: FormInput, name: 'Form', desc: 'Form Creation, Auto PDF to Webform conversion', path: '/products/form' },
+                      ].map((prod, idx) => (
+                        <Link key={idx} to={prod.path} className="block bg-gray-50 rounded-xl p-5 border border-gray-100 hover:shadow-md hover:border-blue-200 transition-all group flex flex-col">
+                          <div className="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center mb-4 text-blue-600 group-hover:scale-110 transition-transform">
+                            <prod.icon className="w-5 h-5" />
                           </div>
-                          <div>
-                            <h4 className="text-sm font-semibold text-white group-hover:text-purple-400 transition-colors">{item.name}</h4>
-                            <p className="text-xs text-gray-400 mt-1 leading-relaxed">{item.description}</p>
-                          </div>
+                          <h4 className="font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">{prod.name}</h4>
+                          <p className="text-xs text-gray-500 leading-tight">{prod.desc}</p>
                         </Link>
                       ))}
                     </div>
-                    
-                    {/* Right side banner of Dropdown */}
-                    <div className="w-1/3 bg-[#3c1a53] p-6 relative overflow-hidden flex flex-col justify-between">
-                      <div>
-                        <h3 className="text-lg font-semibold text-white">AI-Powered Solutions</h3>
-                        <p className="text-sm text-gray-300 mt-2">Transform your business with intelligent automation</p>
-                      </div>
-                      <div className="mt-6 bg-[#1a1b26] rounded-xl p-4 flex-grow border border-white/10 flex items-center justify-center relative shadow-lg">
-                          <div className="absolute top-4 left-4 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center"><span className="text-[10px]">f</span></div>
-                          <div className="absolute bottom-4 right-4 w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center"><span className="text-[10px]">Ig</span></div>
-                          <MessageSquare className="w-16 h-16 text-purple-400 opacity-80" />
-                      </div>
-                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* Resources Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown('resources')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center gap-1 text-gray-300 hover:text-white font-medium text-sm transition-colors py-2">
-                Resources <ChevronDown className="w-4 h-4" />
-              </button>
-              
-              <AnimatePresence>
-                {activeDropdown === 'resources' && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64 bg-[#13141f] rounded-xl shadow-2xl border border-white/5 p-4"
-                  >
-                    <Link to="/blogs" className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors">
-                      <BookOpen className="w-5 h-5 text-purple-400 mt-0.5" />
-                      <div>
-                        <h4 className="text-sm font-semibold text-white">Blogs</h4>
-                        <p className="text-xs text-gray-400 mt-1">Explore our latest blog posts and insights.</p>
-                      </div>
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            {/* Docs Link */}
+            {/* <Link to="/docs" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">
+              Docs
+            </Link> */}
           </nav>
 
-          {/* Action Button */}
-          <div className="hidden lg:flex items-center">
-            <Link 
-              to="/login" 
-              className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-semibold hover:opacity-90 transition-opacity shadow-[0_0_15px_rgba(168,85,247,0.4)]"
-            >
-              Login / Register
+          {/* Right Action Buttons */}
+          <div className="hidden lg:flex items-center gap-6">
+            <Link to="/beta-access" className="text-blue-600 text-sm font-medium hover:text-blue-700 transition-colors">
+              Request Beta Access
+            </Link>
+            <Link to="/contact" className="flex items-center gap-2 border border-blue-600 text-blue-600 px-4 py-2 rounded text-sm font-medium hover:bg-blue-50 transition-colors">
+              Contact Us <Mail className="w-4 h-4" />
             </Link>
           </div>
 
@@ -178,7 +213,7 @@ const Header = () => {
           <div className="lg:hidden flex items-center">
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-gray-300 hover:text-white p-2"
+              className="text-gray-600 hover:text-gray-900"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -186,44 +221,24 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div 
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-[#0a0514] border-t border-white/10 overflow-hidden"
+            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
           >
-            <div className="px-4 pt-2 pb-6 space-y-1">
-              <Link to="/agents" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Agents</Link>
-              <Link to="/use-cases" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Use cases</Link>
-              <Link to="/features" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Features</Link>
-              <Link to="/pricing" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Pricing</Link>
-              <Link to="/contact" className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-white/5">Contact</Link>
-              
-              <div className="px-3 py-2">
-                <div className="text-base font-medium text-white mb-2">Solutions</div>
-                <div className="pl-4 space-y-2">
-                  {solutions.map((item, idx) => (
-                    <Link key={idx} to={`/solutions/${item.name.toLowerCase().replace(' ', '-')}`} className="block text-sm text-gray-400 hover:text-white py-1">
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-
-              <div className="px-3 py-2">
-                <div className="text-base font-medium text-white mb-2">Resources</div>
-                <Link to="/blogs" className="block pl-4 text-sm text-gray-400 hover:text-white py-1">Blogs</Link>
-              </div>
-
-              <div className="px-3 pt-4">
-                <Link 
-                  to="/login" 
-                  className="w-full flex justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white text-base font-semibold"
-                >
-                  Login / Register
+            <div className="px-4 py-6 space-y-4">
+              <Link to="/about" className="block text-base font-medium text-gray-800">About</Link>
+              <Link to="/solutions" className="block text-base font-medium text-gray-800">Solutions</Link>
+              <Link to="/products" className="block text-base font-medium text-gray-800">Products</Link>
+              <Link to="/docs" className="block text-base font-medium text-gray-800">Docs</Link>
+              <div className="pt-4 border-t border-gray-100 flex flex-col gap-4">
+                <Link to="/beta-access" className="text-blue-600 font-medium text-center py-2">Request Beta Access</Link>
+                <Link to="/contact" className="inline-flex items-center justify-center gap-2 border border-blue-600 text-blue-600 px-4 py-2 rounded font-medium">
+                  Contact Us <Mail className="w-4 h-4" />
                 </Link>
               </div>
             </div>

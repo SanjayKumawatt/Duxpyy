@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ChevronDown, 
   ChevronUp, 
-  Bot, 
-  Globe, 
-  Mic 
+  Database, 
+  AlignLeft, 
+  PlayCircle 
 } from 'lucide-react';
 import img from "../assets/illus.jpg";
 
@@ -14,30 +14,29 @@ const BlinkingCursor = () => (
   <span className="animate-pulse border-r-2 border-blue-600 ml-1"></span>
 );
 
-const Agent = () => {
+const Flow = () => {
   const [openAccordion, setOpenAccordion] = useState(0); // First one open by default
   const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', accepted: false });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  // Accordion Data based on the screenshot provided
   const accordionData = [
     {
       id: 0,
-      title: "Goal Oriented Digital Worker",
-      icon: Bot,
-      content: "Effortlessly define goals in conversational language, enabling seamless communication between users and the AI worker."
+      title: "Automatic Data Transformation",
+      icon: Database,
+      content: "Unlock streamlined workflows with our advanced Workflow Module, facilitating seamless data transformation between steps, eliminating manual intervention and accelerating processes."
     },
     {
       id: 1,
-      title: "100+ Languages out of box",
-      icon: Globe,
-      content: "Our developing NLP models are built to understand and process multiple regional and global languages, helping your early-stage team scale operations without language barriers."
+      title: "Human Readable Business Rules",
+      icon: AlignLeft,
+      content: "Define your business logic in plain, easy-to-understand language. At DUXPY Tech, we focus on empowering your operations team to manage and adapt rules without needing to write complex code."
     },
     {
       id: 2,
-      title: "Text & Voice enabled",
-      icon: Mic,
-      content: "Interact with our digital agents through simple text chat or voice inputs. We are building flexible, multimodal interfaces to suit your growing business requirements seamlessly."
+      title: "Execution Ready",
+      icon: PlayCircle,
+      content: "Deploy your workflows instantly. Our developing module ensures that once your business process is mapped out, it can be tested and executed seamlessly within your infrastructure without heavy setup delays."
     }
   ];
 
@@ -60,11 +59,11 @@ const Agent = () => {
       {/* --- HERO SECTION --- */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-20 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight mb-8">
-          Agent - Goal Oriented AI <br className="hidden sm:block" />
-          Worker <BlinkingCursor />
+          Flow - Business Process <br className="hidden sm:block" />
+          Design <BlinkingCursor />
         </h1>
         <p className="text-lg text-gray-500 leading-relaxed max-w-3xl mx-auto mb-10">
-          Introducing our groundbreaking Agent Module. Whether you’re new to AI integration or a seasoned user, our platform ensures that everyone can achieve their goals effortlessly, unleashing productivity without boundaries. Prepare to witness the pinnacle of AI-driven task completion – this marks a new era in streamlined and effective agent performance.
+          Welcome to the heart of efficiency – introducing our Flow module, the powerhouse for business process design. Designed with precision and tailored for simplicity, Flow empowers you to streamline, optimize, and revolutionize your business processes.
         </p>
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -197,14 +196,14 @@ const Agent = () => {
                 <div className="flex items-start gap-2 pt-2 pb-4">
                   <input 
                     type="checkbox" 
-                    id="agentPrivacy" 
+                    id="flowPrivacy" 
                     name="accepted"
                     checked={formData.accepted}
                     onChange={handleInputChange}
                     required
                     className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
-                  <label htmlFor="agentPrivacy" className="text-sm text-gray-500 cursor-pointer">
+                  <label htmlFor="flowPrivacy" className="text-sm text-gray-500 cursor-pointer">
                     I accept the privacy policy
                   </label>
                 </div>
@@ -238,4 +237,4 @@ const Agent = () => {
   );
 };
 
-export default Agent;
+export default Flow;
